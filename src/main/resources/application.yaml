@@ -1,0 +1,20 @@
+camunda.bpm:
+  admin-user:
+    id: admin
+    password: admin
+    firstName: Mr You
+  filter:
+    create: All tasks
+  database:
+    type: h2
+
+spring:
+  h2:
+    console:
+      enabled: true
+      path: '/h2console'
+  datasource:
+    url: 'jdbc:h2:./target/process-engine;DB_CLOSE_DELAY=-1;MVCC=TRUE;DB_CLOSE_ON_EXIT=FALSE'
+    username: sa
+    password: sa
+
