@@ -9,7 +9,7 @@
       <bpmn:incoming>SequenceFlow_1oek8kj</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1oek8kj" sourceRef="helloWorld" targetRef="end" />
-    <bpmn:serviceTask id="helloWorld" name="Hello World" camunda:delegateExpression="${helloWorldActivity}">
+    <bpmn:serviceTask id="helloWorld" name="Hello World!" camunda:delegateExpression="${helloWorldActivity}">
       <bpmn:incoming>SequenceFlow_1qbt9lq</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1oek8kj</bpmn:outgoing>
     </bpmn:serviceTask>
