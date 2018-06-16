@@ -5,6 +5,7 @@
     <process-archive name="helloWorld">
         <resource>definitions/helloworld.bpmn</resource>
         <resource>definitions/task-timer.bpmn</resource>
+        <resource>definitions/async.bpmn</resource>
         <properties>
             <property name="isDeleteUponUndeploy">false</property>
             <property name="isScanForProcessDefinitions">false</property>

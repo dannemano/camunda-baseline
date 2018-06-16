@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.11.3">
+  <bpmn:process id="async_process" isExecutable="true">
+    <bpmn:startEvent id="start" name="Start">
+      <bpmn:outgoing>SequenceFlow_0f23qf5</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="end" name="End">
+      <bpmn:incoming>SequenceFlow_0y4pqqf</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0f23qf5" sourceRef="start" targetRef="serviceTask1" />
+    <bpmn:sequenceFlow id="SequenceFlow_0fl1bhf" sourceRef="serviceTask1" targetRef="wait" />
+    <bpmn:sequenceFlow id="SequenceFlow_0y4pqqf" sourceRef="service2" targetRef="end" />
+    <bpmn:serviceTask id="serviceTask1" name="Service 1" camunda:asyncBefore="true" camunda:delegateExpression="${service1Activity}">
+      <bpmn:incoming>SequenceFlow_0f23qf5</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0fl1bhf</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="service2" name="Service 2" camunda:delegateExpression="${service2Activity}">
+      <bpmn:incoming>SequenceFlow_095vyru</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0y4pqqf</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_095vyru" sourceRef="wait" targetRef="service2" />
+    <bpmn:intermediateCatchEvent id="wait" name="Wait 10 secs">
+      <bpmn:incoming>SequenceFlow_0fl1bhf</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_095vyru</bpmn:outgoing>
+      <bpmn:timerEventDefinition>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT10S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="async_process">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="start">
+        <dc:Bounds x="166" y="115" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="172" y="151" width="24" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0zvv4tn_di" bpmnElement="end">
+        <dc:Bounds x="638" y="115" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="646" y="154" width="20" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0f23qf5_di" bpmnElement="SequenceFlow_0f23qf5">
+        <di:waypoint xsi:type="dc:Point" x="202" y="133" />
+        <di:waypoint xsi:type="dc:Point" x="248" y="133" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="225" y="111.5" width="0" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0fl1bhf_di" bpmnElement="SequenceFlow_0fl1bhf">
+        <di:waypoint xsi:type="dc:Point" x="348" y="133" />
+        <di:waypoint xsi:type="dc:Point" x="400" y="133" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="374" y="111.5" width="0" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0y4pqqf_di" bpmnElement="SequenceFlow_0y4pqqf">
+        <di:waypoint xsi:type="dc:Point" x="586" y="133" />
+        <di:waypoint xsi:type="dc:Point" x="638" y="133" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="612" y="111.5" width="0" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1qdz5yu_di" bpmnElement="serviceTask1">
+        <dc:Bounds x="248" y="93" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0oowm1s_di" bpmnElement="service2">
+        <dc:Bounds x="486" y="93" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_095vyru_di" bpmnElement="SequenceFlow_095vyru">
+        <di:waypoint xsi:type="dc:Point" x="436" y="133" />
+        <di:waypoint xsi:type="dc:Point" x="486" y="133" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="461" y="111.5" width="0" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_12pxkk5_di" bpmnElement="wait">
+        <dc:Bounds x="400" y="115" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="388" y="154" width="63" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
